@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}
+Результаты оценки
+{% endblock %}
+
+{% block body %}
+<header>
+  <div class="d-flex flex-column flex-md-row align-items-center pb-1 mb-4 border-bottom">
+    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+      <a class="fs-5 me-3 py-2 link-body-emphasis text-white" href="/">В главное меню</a>
+    </nav>
+
+    <p class="text-custom">------------------------------------------------------------------</p>
+    <p class="text-custom">------------------------------------------------</p>
+
+    <p class="fs-2 py-3 fw-light text-white">Solve & Choice by HSE</p>
+    <p class="text-custom">-</p>
+    <p class="text-custom">-</p>
+    <p class="text-custom">-</p>
+
+    <p class="d-flex align-items-center text-white">
+      <img src="{{ url_for('static', filename='images/logo.svg') }}" alt="mascot" width="60">
+    </p>
+  </div>
+
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Итоговый рейтинг</h1>
+  </div>
+
+  <div class="container my-5">
+    <div class="table-responsive">
+      <table class="table table-dark table-bordered table-hover text-white">
+        <thead>
+          <tr>
+            <th>Альтернатива</th>
+            <th>Оценка</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in result %}
+          <tr>
+            <td>{{ item.alternative }}</td>
+            <td>{{ item.score }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="container text-center my-5">
+    <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/" role="button" style="width: 400px; height: 80px;">На главную</a>
+  </div>
+</header>
+{% endblock %}

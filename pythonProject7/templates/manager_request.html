@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}
+Организатор: новый аккаунт
+{% endblock %}
+
+{% block body %}
+
+<header>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <p class="text-custom">-</p>
+        <p class="text-custom">-</p>
+      <h1 class="display-1 fw-bold text-white">Новый запрос</h1>
+        <p></p>
+    </div>
+
+    <form action="" method="post" class="form-contact">
+        <div class="col-lg-8 mx-auto">
+            <p class="text-custom">-</p>
+            <p><label class="col-lg-2 col-form-label"></label> <input type="text" name="name" value="" class="form-control form-control-lg" placeholder="Введите название запроса*" required/>
+            <div class="row g-5">
+                <div class="col-6">
+                    <p><label class="col-lg-2 col-form-label"></label> <input type="number" name="experts" value="" class="form-control form-control-lg" placeholder="Введите количество экспертов*" required />
+                </div>
+                <div class="col-6">
+                    <p><label class="col-lg-2 col-form-label"></label> <input type="number" name="criterias" value="" class="form-control form-control-lg" placeholder="Введите количество критериев*" required />
+                </div>
+            </div>
+            <div class="row g-5">
+                <div class="col-6">
+                    <p><label class="col-lg-2 col-form-label"></label> <input type="number" name="scales" value="" class="form-control form-control-lg" placeholder="Введите количество шкал кач. критериев*" required />
+                </div>
+                <div class="col-6">
+                    <p><label class="col-lg-2 col-form-label"></label> <input type="number" name="alternatives" value="" class="form-control form-control-lg" placeholder="Введите количество альтернатив*" required />
+                </div>
+            </div>
+            <div class="row g-5 mt-2">
+            <div class="col-12">
+                <p><label class="col-lg-2 col-form-label"></label>
+                <input type="text" name="access_code"
+                       pattern="\d{5}"
+                       title="Ровно 5 цифр"
+                       class="form-control form-control-lg"
+                       placeholder="Введите 5-значный код доступа*"
+                       required />
+            </div>
+        </div>
+            <div class="container">
+                <p class="text-custom">-</p>
+                <p class="text-custom">-</p>
+                <p class="text-custom">-</p>
+            <div class="row g-5">
+                <div class="col-6">
+                    <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_menu" role="button" style="width: 400px; height: 80px;">В главное меню</a>
+                </div>
+                <div class="col-6">
+                    <p><input class="fs-2 btn btn-lg btn-light rounded-pill"  type="submit" style="width: 400px; height: 80px;" value="Далее" />
+                </div>
+            </div>
+                </div>
+
+        </div>
+    </form>
+
+</header>
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    const codeInput = document.querySelector('input[name="access_code"]');
+    const codeValue = codeInput.value.trim();
+
+    if (!/^\d{5}$/.test(codeValue)) {
+        e.preventDefault();
+        alert('Пожалуйста, введите ровно 5 цифр для кода доступа');
+        codeInput.focus();
+    }
+});
+</script>
+{% endblock %}

@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+{% block title %}Критерии оценивания{% endblock %}
+
+{% block body %}
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Критерии оценивания</h1>
+    <div class="p-3 mb-2 bg-danger text-white">Необходимо заполнить все поля, попробуйте снова</div>
+  </div>
+
+  <form method="post" class="form-contact">
+    <div class="col-lg-8 mx-auto">
+      {% for i in range(count) %}
+        <p class="fs-3 py-3 fw-light text-white">Критерий №{{ i+1 }}</p>
+
+        <!-- Название критерия -->
+        <p>
+          <input type="text" name="name_{{ i }}"
+                 class="form-control form-control-lg"
+                 placeholder="Введите название критерия*" required>
+        </p>
+
+        <!-- Тип критерия -->
+        <div class="form-check form-switch ps-0 mb-3">
+          <label class="form-check-label text-white" for="is_qual_{{ i }}">
+            <input class="form-check-input ms-0" type="checkbox"
+                   name="is_qualitative_{{ i }}" id="is_qual_{{ i }}">
+            Качественный критерий
+          </label>
+        </div>
+
+        <!-- Выбор шкалы -->
+        <p>
+          <select name="scale_{{ i }}" class="form-control form-control-lg" required>
+            <option value="" disabled selected>Выберите шкалу оценивания</option>
+            {% for scale in scales %}
+              <option value="{{ scale.id }}">
+                {{ scale.name }} ({{ scale.values.replace(';', ', ') }})
+              </option>
+            {% endfor %}
+          </select>
+        </p>
+
+        <hr class="text-white">
+      {% endfor %}
+
+      <!-- Кнопки навигации -->
+      <div class="container mt-4">
+        <div class="row g-5">
+          <div class="col-6">
+            <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_request_scales"
+               role="button" style="width: 400px; height: 80px;">Назад</a>
+          </div>
+          <div class="col-6">
+            <input class="fs-2 btn btn-lg btn-light rounded-pill" type="submit"
+                   style="width: 400px; height: 80px;" value="Сохранить">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</header>
+
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    let isValid = true;
+    const scales = {};  // Кэш проверенных шкал
+
+    // Проверка для каждого критерия
+    document.querySelectorAll('[name^="name_"]').forEach((nameInput, index) => {
+        const critNumber = index + 1;
+        const name = nameInput.value.trim();
+        const scaleSelect = document.querySelector(`[name="scale_${index}"]`);
+        const scaleId = scaleSelect.value;
+        // Проверка выбора шкалы
+        if (!scaleId) {
+            alert(`Выберите шкалу для критерия ${critNumber}`);
+            scaleSelect.focus();
+            isValid = false;
+            return;
+        }
+
+        // Проверка уникальности шкал (если нужно)
+        if (scales[scaleId]) {
+            alert(`Шкала уже используется в критерии ${scales[scaleId]}`);
+            scaleSelect.focus();
+            isValid = false;
+            return;
+        }
+        scales[scaleId] = critNumber;
+    });
+
+    if (!isValid) {
+        e.preventDefault();
+    }
+});
+</script>
+
+<style>
+.is-invalid {
+  border-color: #dc3545 !important;
+}
+.form-check-input {
+  width: 3em;
+  height: 1.5em;
+}
+</style>
+
+{% endblock %}

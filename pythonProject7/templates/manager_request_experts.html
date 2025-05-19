@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Организатор: эксперты{% endblock %}
+
+{% block body %}
+<header>
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-1 fw-bold text-white">Эксперты</h1>
+    </div>
+
+    <form action="" method="post" class="form-contact">
+        <input type="hidden" name="total_experts" value="{{ count }}">
+        <div class="col-lg-8 mx-auto">
+
+            {% for i in range(count) %}
+            <p class="fs-3 py-3 fw-light text-white">Эксперт №{{ i + 1 }}</p>
+            <p><input type="text" name="name_{{ i }}" class="form-control form-control-lg" placeholder="Введите ФИО эксперта*" required />
+            <p><input type="text" name="competence_{{ i }}" class="form-control form-control-lg" placeholder="Введите компетенцию эксперта*" required />
+            <hr class="text-white">
+            {% endfor %}
+
+            <div class="container mt-4">
+                <div class="row g-5">
+                    <div class="col-6">
+                        <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_request" role="button" style="width: 400px; height: 80px;">Назад</a>
+                    </div>
+                    <div class="col-6">
+                        <input class="fs-2 btn btn-lg btn-light rounded-pill" type="submit" style="width: 400px; height: 80px;" value="Далее" />
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</header>
+{% endblock %}

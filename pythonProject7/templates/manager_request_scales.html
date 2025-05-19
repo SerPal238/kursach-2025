@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Шкалы оценивания{% endblock %}
+
+{% block body %}
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Шкалы оценивания</h1>
+  </div>
+
+  <form method="post" class="form-contact">
+    <div class="col-lg-8 mx-auto">  <!-- Изменил с 10 на 8 как в экспертах -->
+      {% for i in range(count) %}
+        <p class="fs-3 py-3 fw-light text-white">Шкала №{{ i+1 }}</p>
+
+        <!-- Название шкалы -->
+        <p>
+          <input type="text" name="scale_name_{{ i }}"
+                 class="form-control form-control-lg"
+                 placeholder="Введите название шкалы*" required>
+        </p>
+
+        <!-- Тип шкалы -->
+        <p>
+          <select name="scale_type_{{ i }}" class="form-control form-control-lg">
+            <option value="linguistic">Лингвистическая</option>
+            <option value="numeric">Числовая</option>
+          </select>
+        </p>
+
+        <!-- Значения шкалы -->
+        <p>
+          <input type="text" name="scale_values_{{ i }}"
+                 class="form-control form-control-lg"
+                 placeholder="Введите значения через ; (пример: плохо;средне;отлично)" required>
+        </p>
+
+        <hr class="text-white">
+      {% endfor %}
+
+      <!-- Кнопки навигации -->
+      <div class="container mt-4">
+        <div class="row g-5">
+          <div class="col-6">
+            <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_request_experts"
+               role="button" style="width: 400px; height: 80px;">Назад</a>
+          </div>
+          <div class="col-6">
+            <input class="fs-2 btn btn-lg btn-light rounded-pill" type="submit"
+                   style="width: 400px; height: 80px;" value="Сохранить шкалы">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</header>
+
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    const scales = document.querySelectorAll('[name^="scale_name_"]');
+    let isValid = true;
+
+    // Проверка для каждой шкалы
+    scales.forEach((scaleInput, index) => {
+        const scaleName = scaleInput.value.trim();
+        const scaleType = document.querySelector(`[name="scale_type_${index}"]`).value;
+        const scaleValues = document.querySelector(`[name="scale_values_${index}"]`).value;
+        const values = scaleValues.split(';').map(v => v.trim()).filter(v => v);
+
+        // Проверка количества значений
+        if (values.length > 10) {
+            alert(`Шкала №${index + 1}: максимальное количество значений - 10`);
+            document.querySelector(`[name="scale_values_${index}"]`).focus();
+            isValid = false;
+            return;
+        }
+
+        // Проверка числовых значений
+        if (scaleType === 'numeric') {
+            const isNumeric = values.every(v => !isNaN(v) && v.trim() !== '');
+            if (!isNumeric) {
+                alert(`Шкала №${index + 1}: для числового типа вводите только числа`);
+                document.querySelector(`[name="scale_values_${index}"]`).focus();
+                isValid = false;
+                return;
+            }
+        }
+
+        // Проверка максимальной длины значений
+        const totalLength = values.join('').length;
+        if (totalLength > 500) {
+            alert(`Шкала №${index + 1}: общая длина значений превышает 500 символов`);
+            document.querySelector(`[name="scale_values_${index}"]`).focus();
+            isValid = false;
+            return;
+        }
+    });
+
+    if (!isValid) {
+        e.preventDefault();
+    }
+});
+</script>
+{% endblock %}

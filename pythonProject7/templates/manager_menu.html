@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+Организатор
+{% endblock %}
+
+{% block body %}
+<header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-1 mb-4 border-bottom">
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="fs-5 me-3 py-2 link-body-emphasis text-white" href="/manager">В главное меню организатора</a>
+      </nav>
+
+      <p class="text-custom">-------------------------------------------------</p>
+      <p class="text-custom">------------------------------------------------</p>
+
+      <p class="fs-2 py-3 fw-light text-white">Solve & Choice by HSE</p>
+      <p class="text-custom">-</p>
+      <p class="text-custom">-</p>
+      <p class="text-custom">-</p>
+
+      <p class="d-flex align-items-center text-white">
+        <img src="static/images/logo.svg" alt="mascot" width="60">
+      </p>
+
+    </div>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <p class="text-custom">-</p>
+      <h1 class="display-1 fw-bold text-white">Организатор</h1>
+      <p class="fs-1 fw-light text-white">S&C by HSE</p>
+      <p class="text-custom">-</p>
+    </div>
+
+  <p class="text-custom">-</p>
+  <p class="text-custom">-</p>
+
+    <div class="container overflow-hidden">
+  <div class="row g-8">
+    <div class="col-6">
+      <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_request" role="button" style="width: 600px; height: 100px;">Новый запрос →</a>
+    </div>
+    <div class="col-6">
+      <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_archive" role="button" style="width: 600px; height: 100px;">Архив запросов →</a>
+    </div>
+  </div>
+</div>
+
+  </header>
+{% endblock %}

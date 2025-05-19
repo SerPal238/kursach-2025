@@ -1,0 +1,18 @@
+{
+    "expert_weights": {
+        "Expert 1": 0.5,
+        "Expert 2": 0.5
+    },
+    "criteria_weights": {
+        "Cost": 1
+    },
+    "final_scores": {
+        "Project A": 0.7
+    },
+    "ranking": [
+        [
+            "Project A",
+            0.7
+        ]
+    ]
+}

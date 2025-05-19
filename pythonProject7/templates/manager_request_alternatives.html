@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block title %}Альтернативы{% endblock %}
+
+{% block body %}
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Альтернативы</h1>
+  </div>
+
+  <form method="post" class="form-contact">
+    <div class="col-lg-8 mx-auto">
+      {% for i in range(count) %}
+        <p class="fs-3 py-3 fw-light text-white">Альтернатива №{{ i + 1 }}</p>
+        <p>
+          <input type="text" name="alt_{{ i }}"
+                 class="form-control form-control-lg"
+                 placeholder="Введите название альтернативы {{ i + 1 }}">
+        </p>
+        <hr class="text-white">
+      {% endfor %}
+
+      <div class="container mt-4">
+        <div class="row g-5">
+          <div class="col-6">
+            <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_request_criterias"
+               role="button" style="width: 400px; height: 100px;">Назад</a>
+          </div>
+          <div class="col-6">
+            <input class="fs-2 btn btn-lg btn-light rounded-pill"
+              type="submit"
+              style="width: 400px; height: 100px; white-space: normal;"
+              value="Сохранить и перейти в архив">
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</header>
+
+<script>
+document.querySelector('form').addEventListener('submit', function(e) {
+    const inputs = document.querySelectorAll('[name^="alt_"]');
+    let filledCount = 0;
+    let isValid = true;
+
+    inputs.forEach((input, index) => {
+        const value = input.value.trim();
+        if (value) filledCount++;
+    });
+
+    if (!isValid) {
+        e.preventDefault();
+        return;
+    }
+
+    if (filledCount === 0) {
+        e.preventDefault();
+        alert('Введите хотя бы одну альтернативу!');
+    }
+});
+</script>
+{% endblock %}

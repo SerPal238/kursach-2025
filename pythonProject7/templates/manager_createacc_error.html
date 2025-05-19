@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Организатор: новый аккаунт
+{% endblock %}
+
+{% block body %}
+
+<header>
+    <div class="d-flex flex-column flex-md-row align-items-center pb-1 mb-4 border-bottom">
+
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="fs-5 me-3 py-2 link-body-emphasis text-white" href="/">В главное меню</a>
+      </nav>
+
+      <p class="text-custom">------------------------------------------------------------------</p>
+      <p class="text-custom">------------------------------------------------</p>
+
+      <p class="fs-2 py-3 fw-light text-white">Solve & Choice by HSE</p>
+      <p class="text-custom">-</p>
+      <p class="text-custom">-</p>
+      <p class="text-custom">-</p>
+
+      <p class="d-flex align-items-center text-white">
+        <img src="static/images/logo.svg" alt="mascot" width="60">
+      </p>
+
+    </div>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+      <h1 class="display-1 fw-bold text-white">Новый аккаунт</h1>
+      <div class="p-3 mb-2 bg-danger text-white">Введенные пароли не совпадают, попробуйте снова</div>
+        <p></p>
+    </div>
+
+    <form action="" method="post" class="form-contact">
+        <div class="col-lg-8 mx-auto">
+            <p><label class="col-lg-2 col-form-label"></label> <input type="text" name="name" value="" class="form-control form-control-lg" placeholder="Введите логин*" required/>
+            <p><label class="col-lg-2 col-form-label"></label> <input type="password" name="psw" value="" class="form-control form-control-lg" placeholder="Введите пароль*" required />
+            <p><label class="col-lg-2 col-form-label"></label> <input type="password" name="psw1" value="" class="form-control form-control-lg" placeholder="Повторите пароль*" required />
+
+            <div class="container">
+                <p class="text-custom">-</p>
+                <p class="text-custom">-</p>
+            <div class="row g-5">
+                <div class="col-6">
+                    <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager" role="button" style="width: 400px; height: 80px;">Назад</a>
+                </div>
+                <div class="col-6">
+                    <p><input class="fs-2 btn btn-lg btn-light rounded-pill"  type="submit" style="width: 400px; height: 80px;" value="Создать" />
+                </div>
+            </div>
+                </div>
+
+        </div>
+    </form>
+
+</header>
+
+
+
+
+
+{% endblock %}

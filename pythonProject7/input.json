@@ -1,0 +1,38 @@
+{
+    "alternatives": ["Project A", "Project B"],
+    "criteria": [
+        {
+            "name": "Cost",
+            "type": "numeric",
+            "weight": 1,
+            "scale": [1, 2, 3, 4, 5]
+        }
+    ],
+    "experts": ["Expert 1", "Expert 2"],
+    "ratings": [
+        {
+            "alternative": "Project A",
+            "criteria": "Cost",
+            "expert": "Expert 1",
+            "value": 4
+        },
+        {
+            "alternative": "Project B",
+            "criteria": "Cost",
+            "expert": "Expert 1",
+            "value": 5
+        },
+        {
+            "alternative": "Project A",
+            "criteria": "Cost",
+            "expert": "Expert 2",
+            "value": 3
+        },
+        {
+            "alternative": "Project B",
+            "criteria": "Cost",
+            "expert": "Expert 2",
+            "value": 4
+        }
+    ]
+}

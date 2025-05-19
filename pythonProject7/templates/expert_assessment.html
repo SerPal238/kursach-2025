@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}
+Оценивание альтернатив
+{% endblock %}
+
+{% block body %}
+
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Оценивание альтернатив</h1>
+    <p class="lead text-white">Эксперт: {{ expert.name }}</p>
+  </div>
+
+  <form method="post" class="form-contact">
+    <div class="col-lg-10 mx-auto">
+      {% for alt in alternatives %}
+        <div class="card bg-white-20 my-4 p-4 rounded-3">
+          <h3 class="text-white mb-4">{{ alt.name }}</h3>
+
+          {% for crit in criterias %}
+            <div class="mb-4">
+              <label class="form-label text-white h5">
+                {{ crit.name }}
+                {% if crit.scale.type == 'numeric' %}
+                  <small class="text-muted">(от {{ crit.min_val }} до {{ crit.max_val }})</small>
+                {% endif %}
+              </label>
+
+              {% if crit.is_qualitative %}
+                <select name="rating_{{ alt.id }}_{{ crit.id }}"
+                        class="form-select form-select-lg"
+                        required>
+                  <option value="" disabled selected>Выберите значение</option>
+                  {% for val in crit.scale_values %}
+                    <option value="{{ val }}">{{ val }}</option>
+                  {% endfor %}
+                </select>
+              {% else %}
+                <input type="number"
+                       name="rating_{{ alt.id }}_{{ crit.id }}"
+                       class="form-control form-control-lg"
+                       min="{{ crit.min_val }}"
+                       max="{{ crit.max_val }}"
+                       step="any"
+                       placeholder="Введите число от {{ crit.min_val }} до {{ crit.max_val }}"
+                       required>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+
+      <div class="text-center mt-5">
+        <button type="submit" class="btn btn-light btn-lg px-5 py-3 rounded-pill">
+          <i class="bi bi-save me-2"></i>Сохранить оценки
+        </button>
+      </div>
+    </div>
+  </form>
+</header>
+
+<style>
+.bg-white-20 {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+</style>
+
+{% endblock %}

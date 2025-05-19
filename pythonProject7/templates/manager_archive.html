@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}
+Организатор: архив запросов
+{% endblock %}
+
+{% block body %}
+<header>
+  <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+    <h1 class="display-1 fw-bold text-white">Архив запросов</h1>
+  </div>
+
+<div class="container my-5">
+    <div class="table-responsive">
+        <table class="table grid-table">
+            <thead class="grid-header">
+                <tr>
+                    <th class="start">№</th>
+                    <th>Название</th>
+                    <th>Эксперты</th>
+                    <th>Код доступа</th>
+                    <th class="end">Результаты</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if requests %}
+                    {% for request in requests %}
+                    <tr class="grid-row">
+                        <td>{{ loop.index }}</td>
+                        <td>{{ request.name }}</td>
+                        <td>
+                            <ul class="expert-list">
+                                {% for expert in request.experts %}
+                                <li>{{ expert.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </td>
+                        <td class="access-code">{{ request.access_code }}</td>
+                        <td class="text-center status">В процессе</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr class="grid-row">
+                        <td colspan="5" class="no-requests">Нет созданных запросов</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+  <div class="container text-center my-5">
+    <form method="post" action="/send_decision">
+      <input type="submit" value="Отправить на решатель" class="fs-2 btn btn-lg btn-light rounded-pill mb-4" style="width: 400px; height: 80px;">
+    </form>
+
+    <div class="row g-5 justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/" role="button" style="width: 400px; height: 80px;">В главное меню</a>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_menu" role="button" style="width: 400px; height: 80px;">Назад</a>
+      </div>
+    </div>
+  </div>
+</header>
+<style>
+/* Основные стили таблицы */
+.grid-table {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 3px solid rgba(255, 255, 255, 0.7) !important; /* Более толстая рамка */
+    color: #FFFFFF !important;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    border-radius: 0px;
+    box-shadow: 0 4px 20px rgba(15, 45, 105, 0.3);
+}
+
+/* Заголовки */
+.grid-header th {
+    background: rgba(255, 255, 255, 0.2) !important;
+    border: 3px solid rgba(255, 255, 255, 0.7) !important;
+    padding: 1.2rem;
+    color: #FFFFFF !important;
+}
+
+/* Ячейки */
+.grid-row td {
+    border: 3px solid rgba(255, 255, 255, 0.7) !important; /* Вертикальные разделители */
+    padding: 1rem;
+    vertical-align: middle;
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: #FFFFFF !important;
+}
+
+/* Специальные элементы */
+.access-code {
+    color: #FFFFFF !important;
+}
+
+
+
+.expert-list {
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.expert-list li {
+    padding: 0.4rem 0;
+    border-bottom: 1px dashed rgba(15, 45, 105, 0.2);
+}
+
+.expert-list li:last-child {
+    border-bottom: none;
+}
+
+.no-requests {
+    padding: 2rem !important;
+    font-style: italic;
+}
+</style>
+
+
+{% endblock %}

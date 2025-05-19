@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+Эксперт
+{% endblock %}
+
+{% block body %}
+
+<header>
+
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <p class="text-custom">-</p>
+      <h1 class="display-1 fw-bold text-white">Запрос сохранен!</h1>
+        <p class="fs-3 py-3 fw-light text-white">Создайте код доступа для входа экспертов</p>
+        <p></p>
+    </div>
+
+    <form action="" method="post" class="form-contact">
+        <div class="col-lg-8 mx-auto">
+            <p><label class="col-lg-2 col-form-label"></label> <input type="text" name="psw" value="" class="form-control form-control-lg" placeholder="Введите код из 5 букв или цифр*" required />
+        </div>
+
+        <p class="text-custom">-</p>
+
+        <main style="text-align:center">
+            <img src="static/images/logo.svg" alt="photo" width="250">
+        </main>
+
+        <p class="text-custom">-</p>
+
+        <div style="text-align:center">
+            <div class="container overflow-hidden">
+              <div class="row g-4">
+                <div class="col-6">
+                  <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/" role="button" style="width: 350px; height: 80px;">Главное меню</a>
+                </div>
+                <div class="col-6">
+                  <a class="fs-2 btn btn-lg btn-light rounded-pill" href="/manager_archive" role="button" style="width: 350px; height: 80px;">Архив запросов</a>
+                </div>
+              </div>
+            </div>
+        </div>
+
+    </form>
+
+
+</header>
+
+{% endblock %}
